@@ -8,6 +8,8 @@ const util = require('./util');
 const publicPath = './dist';
 const sourcePath = path.join(__dirname,'./src/');
 // const basePublic = '../wb-front-web3/';
+
+var  HelloWorldPlugin = require('./util/plugin.js');
 module.exports = function (env) {
 	// let dirpath = "";
 	// if(env.project){
@@ -18,69 +20,74 @@ module.exports = function (env) {
 	// webpackConfig
 	const webpackConfig = {
 		entry:{
-			index:'./src/js/index.js'
+			'ticket-csrf1':'./src/js/ticket-csrf.js'
 		},
 		output: {
-			filename: 'js/[name].[hash:8].js',
-			chunkFilename: 'js/[name].[hash:8].js',
+			filename: 'js/[name].js',
+			chunkFilename: 'js/[name].js',
 			path: path.resolve(__dirname, publicPath),
+			libraryTarget: 'umd',
+        	umdNamedDefine: true,
 			publicPath: "/"
 		},
 		module: {
-			rules: [{
-				test: /\.(html|php)$/,
-				loader: 'html-withimg-loader' //处理图片
-			}, {
-				test: /\.(js)$/,
-				exclude: /(node_modules)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['env']
+			rules: [
+				{
+					test: /\.(html|php)$/,
+					loader: 'html-withimg-loader' //处理图片
+				}, 
+				{
+					test: /\.(js)$/,
+					exclude: /(node_modules)/,
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['env']
+						}
 					}
-				}
-			},
-			{
-				test: /\.(css|less)$/,
-				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
+				},
+				{
+					test: /\.(css|less)$/,
+					use: ExtractTextPlugin.extract({
+						fallback: "style-loader",
+						use: [{
+							loader: "css-loader"
+						}, {
+							loader: "less-loader"
+						}]
+					})
+				},
+				{
+					test: /\.(png|svg|jpg|gif)$/,
 					use: [{
-						loader: "css-loader"
-					}, {
-						loader: "less-loader"
+						loader: 'url-loader?limit=1&name=img/[name].[hash:8].[ext]'
 					}]
-				})
-			},
-			{
-				test: /\.(png|svg|jpg|gif)$/,
-				use: [{
-					loader: 'url-loader?limit=1&name=img/[name].[hash:8].[ext]'
-				}]
-			}
+				}
 			]
 		},
 		plugins: [
-			new webpack.ProvidePlugin({
-				$: 'jquery',
-				Vue: ['vue/dist/vue.min.js'],
-				FastClick: 'fastclick',
-				marked: 'marked'
-			}),
-			new webpack.HotModuleReplacementPlugin(), //热加载插件
-			new ExtractTextPlugin('css/[name].[contenthash:8].css'),
-			new webpack.HashedModuleIdsPlugin(),
-			new webpack.optimize.CommonsChunkPlugin({ //提取公共模块，比如index1.js和index2.js都引入了jquery，那么jquery就会被当作公共文件被打包进runtime
-				name: ['runtime'],
-				minChunks: Infinity
-			}),
-			new webpack.ProvidePlugin({
-				Vue: ['vue/dist/vue.min.js']
-			}),
-			new HtmlWebpackPlugin({
-				template:  './src/index.html'  , //原html文件
-				filename: 'index.html', //index.html 生成后的 文件名称
-				chunks: ["index", 'runtime'] //需要的chunks
-		})
+			// new HelloWorldPlugin({options: true})
+			// new webpack.ProvidePlugin({
+			// 	$: 'jquery',
+			// 	Vue: ['vue/dist/vue.min.js'],
+			// 	FastClick: 'fastclick',
+			// 	marked: 'marked'
+			// }),
+			// new webpack.HotModuleReplacementPlugin(), //热加载插件
+			// new ExtractTextPlugin('css/[name].[contenthash:8].css'),
+			// new webpack.HashedModuleIdsPlugin(),
+			// new webpack.optimize.CommonsChunkPlugin({ //提取公共模块，比如index1.js和index2.js都引入了jquery，那么jquery就会被当作公共文件被打包进runtime
+			// 	name: ['runtime'],
+			// 	minChunks: Infinity
+			// }),
+			// new webpack.ProvidePlugin({
+			// 	Vue: ['vue/dist/vue.min.js']
+			// }),
+			// new HtmlWebpackPlugin({
+			// 	template:  './src/index.html'  , //原html文件
+			// 	filename: 'index.html', //index.html 生成后的 文件名称
+			// 	chunks: ["index", 'runtime'] //需要的chunks
+			// })
 
 		]
 	};
