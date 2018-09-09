@@ -6,7 +6,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 
 module.exports = function(env){
-	const common = require('./webpack.common.js')(env);
+	const common = require('./webpack.base.js')(env);
 	const commonPath = common.output.path;
 	const dirpath = commonPath.substring(commonPath.lastIndexOf("wb-front-web3"));
 	const dirpaths = dirpath.replace(/wb-front-web3/, "web3");

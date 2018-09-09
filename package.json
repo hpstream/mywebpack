@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --progress --watch",
-    "start": "webpack --config webpack.base.js --env.project"
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.dev.js --env.project"
   },
   "repository": {
     "type": "git",
@@ -72,15 +73,16 @@
     "webpack-spritesmith": "^0.3.3"
   },
   "dependencies": {
-    "vue": "^2.5.16",
-    "zepto": "^1.2.0",
-    "vue-loader": "^15.2.4",
-    "vue-resource": "^1.5.1",
-    "vue-router": "^3.0.1",
     "jquery": "^1.11.3",
     "jquery-lazyload": "^1.9.7",
     "lazyload": "^2.0.0-beta.2",
     "lazysizes": "^4.0.0-rc4",
-    "vue-template-compiler": "^2.5.16"
+    "markdown-it": "^8.4.2",
+    "vue": "^2.5.16",
+    "vue-loader": "^15.2.4",
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.16",
+    "zepto": "^1.2.0"
   }
 }

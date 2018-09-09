@@ -12,7 +12,7 @@ module.exports = function(env){
 	return merge(base, {
 		devtool: 'inline-source-map',
 		devServer: {
-			// contentBase: publicPath //监听代码变化自动提交并刷新网页
+			// contentBase: publicPath ,//监听代码变化自动提交并刷新网页
 			contentBase: "./", 
 			historyApiFallback:true,
 			inline:true,

@@ -20,7 +20,7 @@ module.exports = function (env) {
 	// webpackConfig
 	const webpackConfig = {
 		entry:{
-			'ticket-csrf1':'./src/js/ticket-csrf.js'
+			'index':'./src/js/index.js'
 		},
 		output: {
 			filename: 'js/[name].js',
@@ -67,27 +67,27 @@ module.exports = function (env) {
 		},
 		plugins: [
 			// new HelloWorldPlugin({options: true})
-			// new webpack.ProvidePlugin({
-			// 	$: 'jquery',
-			// 	Vue: ['vue/dist/vue.min.js'],
-			// 	FastClick: 'fastclick',
-			// 	marked: 'marked'
-			// }),
-			// new webpack.HotModuleReplacementPlugin(), //热加载插件
-			// new ExtractTextPlugin('css/[name].[contenthash:8].css'),
-			// new webpack.HashedModuleIdsPlugin(),
-			// new webpack.optimize.CommonsChunkPlugin({ //提取公共模块，比如index1.js和index2.js都引入了jquery，那么jquery就会被当作公共文件被打包进runtime
-			// 	name: ['runtime'],
-			// 	minChunks: Infinity
-			// }),
-			// new webpack.ProvidePlugin({
-			// 	Vue: ['vue/dist/vue.min.js']
-			// }),
-			// new HtmlWebpackPlugin({
-			// 	template:  './src/index.html'  , //原html文件
-			// 	filename: 'index.html', //index.html 生成后的 文件名称
-			// 	chunks: ["index", 'runtime'] //需要的chunks
-			// })
+			new webpack.ProvidePlugin({
+				$: 'jquery',
+				Vue: ['vue/dist/vue.min.js'],
+				FastClick: 'fastclick',
+				marked: 'marked'
+			}),
+			new webpack.HotModuleReplacementPlugin(), //热加载插件
+			new ExtractTextPlugin('css/[name].[contenthash:8].css'),
+			new webpack.HashedModuleIdsPlugin(),
+			new webpack.optimize.CommonsChunkPlugin({ //提取公共模块，比如index1.js和index2.js都引入了jquery，那么jquery就会被当作公共文件被打包进runtime
+				name: ['runtime'],
+				minChunks: Infinity
+			}),
+			new webpack.ProvidePlugin({
+				Vue: ['vue/dist/vue.min.js']
+			}),
+			new HtmlWebpackPlugin({
+				template:  './src/index.html'  , //原html文件
+				filename: 'index.html', //index.html 生成后的 文件名称
+				chunks: ["index", 'runtime'] //需要的chunks
+			})
 
 		]
 	};
