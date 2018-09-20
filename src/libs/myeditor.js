@@ -31,7 +31,7 @@ const defaults = {
        var  text = token.content;
        var  matches = text.match(defaults.markerPattern);
        if (matches === null) {
-        return false;
+         break;
       }
       var value = matches[1];
       var nodes = [];
@@ -46,7 +46,10 @@ const defaults = {
       }
       j++;
     }
-  
+
+    state.list = [];
+    console.log('dd')
+   
   }
 
   module.exports = (md, o) => {
