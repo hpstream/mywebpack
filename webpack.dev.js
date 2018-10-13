@@ -16,7 +16,15 @@ module.exports = function(env){
 			contentBase: "./", 
 			historyApiFallback:true,
 			inline:true,
-			hot:true
+			hot:true,
+			proxy: {
+				'/api': {
+					target: 'https://www.easy-mock.com', //这里并没有生效，依然是在8018端口发送的请求
+					pathRewrite: {'^/api': 'mock/5a56cf0b55fb93147c5911e7/example/api'},
+					secure: false,
+					changeOrigin: true
+				}
+			}
 		}
 	})
 };

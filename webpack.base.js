@@ -39,12 +39,14 @@ module.exports = function (env) {
 				{
 					test: /\.(js)$/,
 					exclude: /(node_modules)/,
-					use: {
+					use: [{
 						loader: 'babel-loader',
 						options: {
 							presets: ['env']
 						}
-					}
+					},{
+						loader: './my.js',
+					}]
 				},
 				{
 					test: /\.(css|less)$/,
