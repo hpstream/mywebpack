@@ -79,6 +79,7 @@
     "lazyload": "^2.0.0-beta.2",
     "lazysizes": "^4.0.0-rc4",
     "markdown-it": "^8.4.2",
+    "snabbdom": "^0.7.3",
     "vue": "^2.5.16",
     "vue-loader": "^15.2.4",
     "vue-resource": "^1.5.1",
